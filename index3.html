@@ -1,0 +1,295 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Subdue them</title>
+<link rel="icon" href="icon.svg">
+<style>
+  :root, button {
+    font: 13px Segoe UI, sans-serif;
+  }
+  body {
+    margin: 1em 4px;
+  }
+  .intro {
+    margin: 0em 1em;
+    max-width: 35em;
+  }
+  .icon {
+    display: inline-block;
+    font-size: 16px;
+    color: #000000;
+  }
+  .icon-player-playing {
+    animation: 1.666666s linear icon-player-playing;
+    transform: scaleX(-1);
+  }
+  @keyframes icon-player-playing {
+    0% {
+      transform-origin: bottom center;
+      transform: translate(-8.5em, 0em) rotate(-5deg) scaleX(-1);
+    }
+    42% {
+      transform: translate(-1.5em, 0em) rotate(-5deg) scaleX(-1);
+    }
+    48% {
+      transform: translate(-1em, 0em) rotate(5deg) scaleX(-1);
+    }
+    63% {
+      transform: translate(0.01em, 0em) rotate(5deg) scaleX(-1);
+    }
+    69% {
+      transform: translate(0.01em, 0em) rotate(5deg) scaleX(-1);
+    }
+    75% {
+      transform: translate(0em, 0em) rotate(0deg) scaleX(-1);
+    }
+    100% {
+      transform-origin: bottom center;
+      transform: translate(0em, 0em) rotate(0deg) scaleX(-1);
+    }
+  }
+  .icon-player-lose {
+    animation: 1.666666s linear icon-player-lose;
+    transform: rotate(-180deg) scaleX(-1);
+    filter: grayscale();
+    opacity: 0.25;
+  }
+  @keyframes icon-player-lose {
+    0% {
+      transform: translate(0em) rotate(0deg) scaleX(-1);
+      filter: none;
+      opacity: 1;
+    }
+    29.9% {
+      filter: none;
+    }
+    30% {
+      filter: contrast(0) brightness(2);
+    }
+    36% {
+      transform: translate(0em) rotate(0deg) scaleX(-1);
+      filter: none;
+    }
+    38% {
+      transform: translate(-0.1em) rotate(0deg) scaleX(-1);
+    }
+    40% {
+      transform: translate(0.1em) rotate(0deg) scaleX(-1);
+    }
+    42% {
+      transform: translate(0em) rotate(0deg) scaleX(-1);
+    }
+    47.9% {
+      filter: none;
+      opacity: 1;
+    }
+    48% {
+      transform: translate(0em, 0em) rotate(0deg) scaleX(-1);
+      filter: grayscale();
+      opacity: 0.25;
+    }
+    54% {
+      transform: translate(0em, -0.5em) rotate(-90deg) scaleX(-1);
+    }
+    60% {
+      transform: translate(0em, 0em) rotate(-180deg) scaleX(-1);
+    }
+  }
+  .icon-player-win {
+    animation: 1s linear 0.5s infinite icon-player-win;
+    transform: scaleX(-1);
+  }
+  @keyframes icon-player-win {
+    0% {
+      transform: translate(0em, 0em) rotate(0deg) scaleX(-1);
+    }
+    25% {
+      transform: translate(-0.1em, -0.05em) rotate(-10deg) scaleX(-1);
+    }
+    50% {
+      transform: translate(0em, 0em) rotate(0deg) scaleX(-1);
+    }
+    75% {
+      transform: translate(0.1em, -0.05em) rotate(10deg) scaleX(-1);
+    }
+  }
+  .icon-add-disabled {
+    animation: 1.666666s linear icon-add-disabled;
+    transform: rotate(180deg);
+    filter: grayscale();
+    opacity: 0.25;
+  }
+  @keyframes icon-add-disabled {
+    0% {
+      transform: translate(0em);
+      filter: contrast(0) brightness(2);
+      opacity: 1;
+    }
+    6% {
+      transform: translate(0em);
+      filter: none;
+    }
+    8% {
+      transform: translate(0.1em);
+    }
+    10% {
+      transform: translate(-0.1em);
+    }
+    12% {
+      transform: translate(0em);
+    }
+    17.9% {
+      transform: translate(0em);
+      filter: none;
+      opacity: 1;
+    }
+    18% {
+      transform: rotate(0deg) translate(0em, 0em);
+      filter: grayscale();
+      opacity: 0.25;
+    }
+    24% {
+      transform: translate(0em, -0.5em) rotate(90deg);
+    }
+    30% {
+      transform: translate(0em, 0em) rotate(180deg);
+    }
+  }
+  .icon-add-win {
+    animation: 1s linear infinite icon-add-win;
+  }
+  @keyframes icon-add-win {
+    0% {
+      transform: translate(0em, 0em) scale(1, 1);
+    }
+    19.99% {
+      transform: translate(0em, -0.2em) scale(1, 1);
+    }
+    20% {
+      transform: translate(0em, -0.2em) scale(-1, 1);
+    }
+    30% {
+      transform: translate(0em, -0.2em) scale(-1, 1);
+    }
+    50% {
+      transform: translate(0em, 0em) scale(-1, 1);
+    }
+    69.99% {
+      transform: translate(0em, -0.2em) scale(-1, 1);
+    }
+    70% {
+      transform: translate(0em, -0.2em) scale(1, 1);
+    }
+    80% {
+      transform: translate(0em, -0.2em) scale(1, 1);
+    }
+  }
+  .icon-mul-disabled {
+    animation: 1.666666s linear icon-mul-disabled;
+    filter: grayscale();
+    opacity: 0.25;
+  }
+  @keyframes icon-mul-disabled {
+    0% {
+      filter: contrast(0) brightness(2);
+      opacity: 1;
+    }
+    6% {
+      transform: translate(0em, 0em) rotate(0deg);
+      filter: none;
+    }
+    9% {
+      transform: translate(-0.15em, -0.1em) rotate(-15deg);
+    }
+    12% {
+      transform: translate(-0.3em, 0.1em) rotate(-30deg);
+    }
+    15% {
+      transform: translate(-0.3em, 0.1em) rotate(-30deg);
+    }
+    18% {
+      transform: translate(0em, -0.1em) rotate(0deg);
+    }
+    21% {
+      transform: translate(0.3em, 0.1em) rotate(30deg);
+    }
+    24% {
+      transform: translate(0.3em, 0.1em) rotate(30deg);
+    }
+    27% {
+      transform: translate(0.15em, -0.1em) rotate(15deg);
+    }
+    29.9% {
+      transform: translate(0em, 0em) rotate(0deg);
+      filter: none;
+      opacity: 1;
+    }
+    30% {
+      filter: grayscale();
+      opacity: 0.25;
+    }
+  }
+  .icon-scenery {
+    opacity: 0.5;
+  }
+  .player {
+    display: inline-block;
+    margin-bottom: 4px;
+    text-align: center;
+  }
+  .player-scaling {
+    display: inline-block;
+    transform-origin: bottom center;
+    transition: transform cubic-bezier(0.25, 2, 0.5, 1) 0.4s;
+  }
+  .item {
+    margin-bottom: 4px;
+    border: medium none;
+    border-radius: 6px;
+    padding: 4px 6px;
+    background-color: #f0f0f0;
+  }
+  .item-mul {
+    background: #e0f0ff;
+  }
+  .item:disabled {
+    background-color: transparent;
+  }
+  .item:enabled:hover {
+    background-color: #ffffc0;
+  }
+  .label {
+    display: inline-block;
+    vertical-align: 1px;
+    border-radius: 3px;
+    padding: 1px 3px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .label-boss {
+    background-color: #8000ff;
+    color: #ffffff;
+  }
+  .scenery {
+    display: inline-block;
+    text-align: center;
+  }
+</style>
+<div class="intro">
+  <p>
+    <b>The situation:</b>
+    We've got a problem.
+    Unusually large animals are rampaging around town.
+    Please bring them back to the Sanctuary for Unusually Large Animals upstate.
+    You'll have to... subdue them...
+  </p>
+  <p>
+    <b>Rules:</b>
+    Click animals with a smaller number than your truck.
+    If it's exactly equal, you'll still lose!
+    Click snacks whenever for a multiplicative bonus.
+  </p>
+</div>
+<div id="out"></div>
+<script src="script3.js"></script>

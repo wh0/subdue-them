@@ -1,0 +1,236 @@
+<!doctype html>
+<link rel="icon" href="icon.svg">
+<style>
+  :root {
+    font: 13px Segoe UI, sans-serif;
+  }
+  .icon {
+    display: inline-block;
+    color: #000000;
+  }
+  .icon-add-disabled {
+    animation: 1.666666s linear icon-add-disabled;
+    transform: rotate(180deg);
+    filter: grayscale();
+    opacity: 0.25;
+  }
+  @keyframes icon-add-disabled {
+    0% {
+      transform: translate(0em);
+      filter: contrast(0) brightness(2);
+      opacity: 1;
+    }
+    6% {
+      transform: translate(0em);
+      filter: none;
+    }
+    8% {
+      transform: translate(0.1em);
+    }
+    10% {
+      transform: translate(-0.1em);
+    }
+    12% {
+      transform: translate(0em);
+    }
+    17.9% {
+      animation-timing-function: step-end;
+      transform: translate(0em);
+      filter: none;
+      opacity: 1;
+    }
+    18% {
+      transform: rotate(0deg) translate(0em, 0em);
+      filter: grayscale();
+      opacity: 0.25;
+    }
+    24% {
+      transform: translate(0em, -0.5em) rotate(90deg);
+    }
+    30% {
+      transform: translate(0em, 0em) rotate(180deg);
+    }
+  }
+  .icon-add-win {
+    animation: 1s linear infinite icon-add-win;
+  }
+  @keyframes icon-add-win {
+    0% {
+      transform: translate(0em, 0em) scale(1, 1);
+    }
+    19.9% {
+      animation-timing-function: step-end;
+      transform: translate(0em, -0.2em) scale(1, 1);
+    }
+    20% {
+      transform: translate(0em, -0.2em) scale(-1, 1);
+    }
+    30% {
+      transform: translate(0em, -0.2em) scale(-1, 1);
+    }
+    50% {
+      transform: translate(0em, 0em) scale(-1, 1);
+    }
+    69.9% {
+      animation-timing-function: step-end;
+      transform: translate(0em, -0.2em) scale(-1, 1);
+    }
+    70% {
+      transform: translate(0em, -0.2em) scale(1, 1);
+    }
+    80% {
+      transform: translate(0em, -0.2em) scale(1, 1);
+    }
+  }
+  .icon-mul-disabled {
+    animation: 1.666666s linear icon-mul-disabled;
+    filter: grayscale();
+    opacity: 0.25;
+  }
+  @keyframes icon-mul-disabled {
+    0% {
+      filter: contrast(0) brightness(2);
+      opacity: 1;
+    }
+    6% {
+      transform: translate(0em, 0em) rotate(0deg);
+      filter: none;
+    }
+    9% {
+      transform: translate(-0.15em, -0.1em) rotate(-15deg);
+    }
+    12% {
+      transform: translate(-0.3em, 0.1em) rotate(-30deg);
+    }
+    15% {
+      transform: translate(-0.3em, 0.1em) rotate(-30deg);
+    }
+    18% {
+      transform: translate(0em, -0.1em) rotate(0deg);
+    }
+    21% {
+      transform: translate(0.3em, 0.1em) rotate(30deg);
+    }
+    24% {
+      transform: translate(0.3em, 0.1em) rotate(30deg);
+    }
+    27% {
+      transform: translate(0.15em, -0.1em) rotate(15deg);
+    }
+    29.9% {
+      animation-timing-function: step-end;
+      transform: translate(0em, 0em) rotate(0deg);
+      filter: none;
+      opacity: 1;
+    }
+    30% {
+      filter: grayscale();
+      opacity: 0.25;
+    }
+  }
+  .icon-player-playing {
+    animation: 1.666666s linear icon-player-playing;
+    transform: scaleX(-1);
+  }
+  @keyframes icon-player-playing {
+    0% {
+      transform-origin: bottom center;
+      transform: translate(-12.01em, 0em) rotate(-5deg) scaleX(-1);
+    }
+    27% {
+      transform: translate(-4.01em, 0em) rotate(-5deg) scaleX(-1);
+    }
+    33% {
+      transform: translate(-2.66em, -0.01em) rotate(5deg) scaleX(-1);
+    }
+    45% {
+      transform: translate(-0.88em, -0.01em) rotate(5deg) scaleX(-1);
+    }
+    57% {
+      transform: translate(0.01em, -0.01em) rotate(5deg) scaleX(-1);
+    }
+    66% {
+      transform: translate(0.01em, -0.01em) rotate(5deg) scaleX(-1);
+    }
+    72% {
+      transform: translate(0em, 0em) rotate(0deg) scaleX(-1);
+    }
+    100% {
+      transform-origin: bottom center;
+      transform: translate(0em, 0em) rotate(0deg) scaleX(-1);
+    }
+  }
+  .icon-player-lose {
+    animation: 1.666666s linear icon-player-lose;
+    transform: rotate(-180deg) scaleX(-1);
+    filter: grayscale();
+    opacity: 0.25;
+  }
+  @keyframes icon-player-lose {
+    0% {
+      transform: translate(0em) rotate(0deg) scaleX(-1);
+      filter: none;
+      opacity: 1;
+    }
+    29.9% {
+      animation-timing-function: step-end;
+      filter: none;
+    }
+    30% {
+      filter: contrast(0) brightness(2);
+    }
+    36% {
+      transform: translate(0em) rotate(0deg) scaleX(-1);
+      filter: none;
+    }
+    38% {
+      transform: translate(-0.1em) rotate(0deg) scaleX(-1);
+    }
+    40% {
+      transform: translate(0.1em) rotate(0deg) scaleX(-1);
+    }
+    42% {
+      transform: translate(0em) rotate(0deg) scaleX(-1);
+    }
+    47.9% {
+      animation-timing-function: step-end;
+      filter: none;
+      opacity: 1;
+    }
+    48% {
+      transform: translate(0em, 0em) rotate(0deg) scaleX(-1);
+      filter: grayscale();
+      opacity: 0.25;
+    }
+    54% {
+      transform: translate(0em, -0.5em) rotate(-90deg) scaleX(-1);
+    }
+    60% {
+      transform: translate(0em, 0em) rotate(-180deg) scaleX(-1);
+    }
+  }
+  .icon-player-win {
+    animation: 1s linear 0.5s infinite icon-player-win;
+    transform: scaleX(-1);
+  }
+  @keyframes icon-player-win {
+    0% {
+      transform: translate(0em, 0em) rotate(0deg) scaleX(-1);
+    }
+    25% {
+      transform: translate(-0.1em, -0.05em) rotate(-10deg) scaleX(-1);
+    }
+    50% {
+      transform: translate(0em, 0em) rotate(0deg) scaleX(-1);
+    }
+    75% {
+      transform: translate(0.1em, -0.05em) rotate(10deg) scaleX(-1);
+    }
+  }
+</style>
+<span class="icon icon-add-disabled" style="font-size: 128px;">🐕</span>
+<span class="icon icon-add-win" style="font-size: 128px;">🐕</span>
+<span class="icon icon-mul-disabled" style="font-size: 128px;">🍒</span>
+<span style="display: inline-block; width: 360px; background-color: #f0f0f0; text-align: center;"><span class="icon icon-player-playing" style="font-size: 17.3940px">🚚</span></span>
+<span class="icon icon-player-lose" style="font-size: 128px;">🚚</span>
+<span class="icon icon-player-win" style="font-size: 128px;">🚚</span>

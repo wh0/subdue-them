@@ -1,0 +1,11 @@
+{
+  "include": [
+    "script4.js"
+  ],
+  "compilerOptions": {
+    "checkJs": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "target": "es6"
+  }
+}

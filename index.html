@@ -1,0 +1,464 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Subdue them</title>
+<link rel="icon" href="icon.svg">
+<style>
+  :root, input, button {
+    font: 13px Segoe UI, sans-serif;
+  }
+  body {
+    margin: 1em;
+  }
+  .intro {
+    max-width: 35em;
+  }
+  .ensure-last-baseline {
+    /*
+    Safari uses the first baseline of a <button>'s content as the button's
+    baseline. Create an extra single-line inline formatting context around our
+    button content to ensure the button's baseline is the last line of our
+    content.
+    */
+    display: inline-block;
+  }
+  .strut {
+    visibility: hidden;
+  }
+  .items {
+    margin: 0em -1em;
+    padding: 0px 4px;
+  }
+  .chunk {
+    white-space: nowrap;
+  }
+  .item {
+    margin-bottom: 4px;
+    border: medium none;
+    border-radius: 6px;
+    padding: 4px 6px;
+    background-color: #f0f0f0;
+  }
+  .item:disabled {
+    background-color: transparent;
+  }
+  .item:enabled:hover {
+    background-color: #e0e0e0;
+  }
+  .item:enabled:active {
+    background-color: #d0d0d0;
+  }
+  .item-mul {
+    background: #e0f0ff;
+  }
+  .item-mul:enabled:hover {
+    background-color: #d0e0ff;
+  }
+  .item-mul:enabled:active {
+    background-color: #a0d0ff;
+  }
+  .scenery {
+    display: inline-block;
+    text-align: center;
+  }
+  .icon {
+    display: inline-block;
+    font-size: 16px;
+  }
+  .icon-add-disabled {
+    animation: 1.666666s linear icon-add-disabled;
+    transform: rotate(180deg);
+    filter: grayscale();
+    opacity: 0.25;
+  }
+  @keyframes icon-add-disabled {
+    0% {
+      transform: translate(0em);
+      filter: contrast(0) brightness(2);
+      opacity: 1;
+    }
+    6% {
+      transform: translate(0em);
+      filter: none;
+    }
+    8% {
+      transform: translate(0.1em);
+    }
+    10% {
+      transform: translate(-0.1em);
+    }
+    12% {
+      transform: translate(0em);
+    }
+    17.9% {
+      animation-timing-function: step-end;
+      transform: translate(0em);
+      filter: none;
+      opacity: 1;
+    }
+    18% {
+      transform: rotate(0deg) translate(0em, 0em);
+      filter: grayscale();
+      opacity: 0.25;
+    }
+    24% {
+      transform: translate(0em, -0.5em) rotate(90deg);
+    }
+    30% {
+      transform: translate(0em, 0em) rotate(180deg);
+    }
+  }
+  .icon-add-win {
+    animation: 1s linear infinite icon-add-win;
+  }
+  @keyframes icon-add-win {
+    0% {
+      transform: translate(0em, 0em) scale(1, 1);
+    }
+    19.9% {
+      animation-timing-function: step-end;
+      transform: translate(0em, -0.2em) scale(1, 1);
+    }
+    20% {
+      transform: translate(0em, -0.2em) scale(-1, 1);
+    }
+    30% {
+      transform: translate(0em, -0.2em) scale(-1, 1);
+    }
+    50% {
+      transform: translate(0em, 0em) scale(-1, 1);
+    }
+    69.9% {
+      animation-timing-function: step-end;
+      transform: translate(0em, -0.2em) scale(-1, 1);
+    }
+    70% {
+      transform: translate(0em, -0.2em) scale(1, 1);
+    }
+    80% {
+      transform: translate(0em, -0.2em) scale(1, 1);
+    }
+  }
+  .icon-mul-disabled {
+    animation: 1.666666s linear icon-mul-disabled;
+    filter: grayscale();
+    opacity: 0.25;
+  }
+  @keyframes icon-mul-disabled {
+    0% {
+      filter: contrast(0) brightness(2);
+      opacity: 1;
+    }
+    6% {
+      transform: translate(0em, 0em) rotate(0deg);
+      filter: none;
+    }
+    9% {
+      transform: translate(-0.15em, -0.1em) rotate(-15deg);
+    }
+    12% {
+      transform: translate(-0.3em, 0.1em) rotate(-30deg);
+    }
+    15% {
+      transform: translate(-0.3em, 0.1em) rotate(-30deg);
+    }
+    18% {
+      transform: translate(0em, -0.1em) rotate(0deg);
+    }
+    21% {
+      transform: translate(0.3em, 0.1em) rotate(30deg);
+    }
+    24% {
+      transform: translate(0.3em, 0.1em) rotate(30deg);
+    }
+    27% {
+      transform: translate(0.15em, -0.1em) rotate(15deg);
+    }
+    29.9% {
+      animation-timing-function: step-end;
+      transform: translate(0em, 0em) rotate(0deg);
+      filter: none;
+      opacity: 1;
+    }
+    30% {
+      filter: grayscale();
+      opacity: 0.25;
+    }
+  }
+  .icon-scenery {
+    opacity: 0.5;
+  }
+  .icon-player-playing {
+    animation: 1.666666s linear icon-player-playing;
+    transform: scaleX(-1);
+  }
+  @keyframes icon-player-playing {
+    0% {
+      transform-origin: bottom center;
+      transform: translate(-12.01em, 0em) rotate(-5deg) scaleX(-1);
+    }
+    27% {
+      transform: translate(-4.01em, 0em) rotate(-5deg) scaleX(-1);
+    }
+    33% {
+      transform: translate(-2.66em, -0.01em) rotate(5deg) scaleX(-1);
+    }
+    45% {
+      transform: translate(-0.88em, -0.01em) rotate(5deg) scaleX(-1);
+    }
+    57% {
+      transform: translate(0.01em, -0.01em) rotate(5deg) scaleX(-1);
+    }
+    66% {
+      transform: translate(0.01em, -0.01em) rotate(5deg) scaleX(-1);
+    }
+    72% {
+      transform: translate(0em, 0em) rotate(0deg) scaleX(-1);
+    }
+    100% {
+      transform-origin: bottom center;
+      transform: translate(0em, 0em) rotate(0deg) scaleX(-1);
+    }
+  }
+  .icon-player-lose {
+    animation: 1.666666s linear icon-player-lose;
+    transform: rotate(-180deg) scaleX(-1);
+    filter: grayscale();
+    opacity: 0.25;
+  }
+  @keyframes icon-player-lose {
+    0% {
+      transform: translate(0em) rotate(0deg) scaleX(-1);
+      filter: none;
+      opacity: 1;
+    }
+    29.9% {
+      animation-timing-function: step-end;
+      filter: none;
+    }
+    30% {
+      filter: contrast(0) brightness(2);
+    }
+    36% {
+      transform: translate(0em) rotate(0deg) scaleX(-1);
+      filter: none;
+    }
+    38% {
+      transform: translate(-0.1em) rotate(0deg) scaleX(-1);
+    }
+    40% {
+      transform: translate(0.1em) rotate(0deg) scaleX(-1);
+    }
+    42% {
+      transform: translate(0em) rotate(0deg) scaleX(-1);
+    }
+    47.9% {
+      animation-timing-function: step-end;
+      filter: none;
+      opacity: 1;
+    }
+    48% {
+      transform: translate(0em, 0em) rotate(0deg) scaleX(-1);
+      filter: grayscale();
+      opacity: 0.25;
+    }
+    54% {
+      transform: translate(0em, -0.5em) rotate(-90deg) scaleX(-1);
+    }
+    60% {
+      transform: translate(0em, 0em) rotate(-180deg) scaleX(-1);
+    }
+  }
+  .icon-player-win {
+    animation: 1s linear 0.5s infinite icon-player-win;
+    transform: scaleX(-1);
+  }
+  @keyframes icon-player-win {
+    0% {
+      transform: translate(0em, 0em) rotate(0deg) scaleX(-1);
+    }
+    25% {
+      transform: translate(-0.1em, -0.05em) rotate(-10deg) scaleX(-1);
+    }
+    50% {
+      transform: translate(0em, 0em) rotate(0deg) scaleX(-1);
+    }
+    75% {
+      transform: translate(0.1em, -0.05em) rotate(10deg) scaleX(-1);
+    }
+  }
+  .label {
+    display: inline-block;
+    vertical-align: 1px;
+    border-radius: 3px;
+    padding: 1px 3px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .label-boss {
+    background-color: #8000ff;
+    color: #ffffff;
+  }
+  .sticky-space {
+    height: 200px;
+  }
+  .sticky {
+    position: sticky;
+    bottom: 0px;
+    margin: 0em -1em;
+    padding: 4px;
+  }
+  .player-space {
+    position: relative;
+    border-radius: 6px;
+    padding: 4px 6px;
+    width: 340px;
+    height: 32px;
+    background-color: #f8f8f8;
+  }
+  .player {
+    position: absolute;
+    bottom: 0px;
+    width: 340px;
+    text-align: center;
+    /*
+    The hitbox is way bigger than the truck, so nicer not to have it not
+    block clicks.
+    */
+    pointer-events: none;
+  }
+  .player-scaling {
+    display: inline-block;
+    transform-origin: bottom center;
+  }
+  .player-scaling-grow {
+    transition: transform cubic-bezier(0.25, 2, 0.5, 1) 0.4s;
+  }
+  .player-score {
+    pointer-events: auto;
+  }
+  .control {
+    margin-bottom: 4px;
+    border: medium none;
+    border-radius: 6px;
+    padding: 4px 6px;
+    background-color: #f0f0f0;
+  }
+  .control:enabled:hover {
+    background-color: #e0e0e0;
+  }
+  .control:enabled:active {
+    background-color: #d0d0d0;
+  }
+  .control-inline-form {
+    display: inline;
+  }
+  .control-input-text {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 3px 5px;
+  }
+  .control-input-text:enabled:hover {
+    border-color: #c0c0c0;
+  }
+  .attention-dot {
+    margin: -2px -2px 0px -4px;
+    vertical-align: top;
+  }
+  .attention-tri {
+    position: sticky;
+    bottom: 4px;
+    margin: -2px -2px 0px -4px;
+    vertical-align: top;
+  }
+  .footer {
+    margin: 1em -1em 0em;
+    border-top: 1px solid #e0e0e0;
+    padding: 0em 1em 3em;
+    color: #c0c0c0;
+  }
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-color: #0f1624;
+      color: #eaddc1;
+    }
+    .item {
+      background-color: #1b2130;
+      color: #eaddc1;
+    }
+    .item:disabled {
+      color: #aa9d83;
+    }
+    .item:enabled:hover {
+      background-color: #262e3d;
+    }
+    .item:enabled:active {
+      background-color: #333a4b;
+    }
+    .item-mul {
+      background: #02243c;
+    }
+    .item-mul:enabled:hover {
+      background-color: #0f304a;
+    }
+    .item-mul:enabled:active {
+      background-color: #1d3d58;
+    }
+    .label-boss {
+      background-color: #4f2f8f;
+      color: #dedede;
+    }
+    .player-space {
+      background-color: #151b2a;
+    }
+    .control {
+      background-color: #1b2130;
+      color: #eaddc1;
+    }
+    .control:enabled:hover {
+      background-color: #262e3d;
+    }
+    .control:enabled:active {
+      background-color: #333a4b;
+    }
+    .control-input-text {
+      border-color: #262e3d;
+      background-color: #0f1624;
+      color: #eaddc1;
+    }
+    .control-input-text:enabled:hover {
+      border-color: #404858;
+    }
+    .footer {
+      border-top-color: #262e3d;
+      color: #404858;
+    }
+  }
+</style>
+<div class="intro">
+  <p>
+    <b>The situation:</b>
+    We've got a problem.
+    Unusually large animals are rampaging around town.
+    Please bring them back to the Sanctuary for Unusually Large Animals upstate.
+    You'll have to... subdue them...
+  </p>
+  <p>
+    <b>Rules:</b>
+    Click animals with a smaller number than your truck.
+    If it's exactly equal, you'll still lose!
+    Click snacks whenever for a multiplicative bonus.
+    <!--
+    Seeing as you're here in the source code or dev console, I take it you're
+    about to look at or do things that aren't intended as part of playing the
+    game. I should tell you that there's one more rule, Rule S:
+    Don't spoil things for people who want to play the game.
+    -->
+  </p>
+</div>
+<div id="out"></div>
+<div class="footer">
+  Please do not write below this line.
+</div>
+<script src="script4.js"></script>
