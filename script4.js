@@ -827,7 +827,7 @@ function render(/** @type {Node} */ dst, /** @type {DecorItem[]} */ decorItems, 
 
 function dbTxComplete(/** @type {IDBTransaction} */ tx) {
   return /** @type {Promise<void>} */ (new Promise((resolve, reject) => {
-    tx.onerror = (e) => {
+    tx.onabort = (e) => {
       reject(tx.error);
     };
     tx.oncomplete = (e) => {
