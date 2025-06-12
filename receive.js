@@ -70,7 +70,7 @@ const doneUrl = '.';
     const startP = document.createElement('p');
     const startButton = document.createElement('input');
     startButton.type = 'button';
-    startButton.value = 'Move my save data';
+    startButton.value = 'Transfer my save data';
     startButton.onclick = (e) => {
       window.open(migrateUrl);
     };
