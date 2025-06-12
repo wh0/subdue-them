@@ -195,7 +195,6 @@ function generate(/** @type {() => number} */ rand, /** @type {number} */ maxMIn
   for (let f = 2; f <= maxMInclusive; f++) {
     m.push(f);
   }
-  console.log('m', m);
   let rerollA = 0;
   let ceil = startScore;
   for (const f of m) {
