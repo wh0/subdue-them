@@ -1461,6 +1461,17 @@ function buildGameFromOptions(/** @type {URLSearchParams} */ options) {
   }
 }
 
-const hashOptions = new URLSearchParams(location.hash.replace(/^#/, ''));
+const hashStr = location.hash;
+const hashOptions = new URLSearchParams(hashStr.replace(/^#/, ''));
 
-buildGameFromOptions(hashOptions);
+const receiveUrl = 'receive.html';
+
+(async () => {
+  const dbs = await indexedDB.databases();
+  if (!dbs.find((db) => db.name === 'omni')) {
+    sessionStorage.setItem('receive_hash_str', hashStr);
+    location.href = receiveUrl;
+    return;
+  }
+  buildGameFromOptions(hashOptions);
+})();
