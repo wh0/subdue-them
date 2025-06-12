@@ -1,0 +1,43 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Subdue them (migrate)</title>
+<link rel="icon" href="icon.svg">
+<style>
+  :root, input {
+    font: 13px Segoe UI, sans-serif;
+  }
+  body {
+    margin: 1em;
+  }
+  .intro {
+    max-width: 35em;
+  }
+  .footer {
+    margin: 1em -1em 0em;
+    border-top: 1px solid #e0e0e0;
+    padding: 0em 1em 3em;
+    color: #c0c0c0;
+  }
+  @media (prefers-color-scheme: dark) {
+    body {
+      background-color: #0f1624;
+      color: #eaddc1;
+    }
+    .footer {
+      border-top-color: #262e3d;
+      color: #404858;
+    }
+  }
+</style>
+<div class="intro">
+  <p>
+    We're transferring your saved data.
+    This part should continue automatically.
+  </p>
+</div>
+<div id="out"></div>
+<div class="footer">
+  Please do not write below this line.
+</div>
+<script src="migrate.js"></script>
